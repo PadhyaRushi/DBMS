@@ -1,0 +1,92 @@
+Task : 1
+
+
+I1) SELECT First_name AS EmployeeName FROM employee.
+
+I2) SELECT First_name,Joining_date FROM employee.
+
+I3) Not Possible.
+
+I4) SELECT * FROM employee WHERE First_name LIKE '%o%';
+
+I5) SELECT * FROM employee WHERE Joining_date=2013-Jan-01;
+
+I6) SELECT Department, SUM (Salary) 
+    FROM employee GROUP BY Department
+    ORDER BY Salary DESC;
+
+I7)SELECT Department,MAX(Salary) MAXSALARY
+FROM employee GROUP BY Department ORDER BY MAXSALARY ASC;
+
+I8)SELECT First_name,Incentive_amount FROM employee A INNER JOIN incentive B ON A.Employee_id=B.Employee_ref_id AND Incentive_amount >3000;
+
+I9)SELECT MIN(Salary) FROM (SELECT * FROM (SELECT * FROM employee ORDER BY Salary DESC)
+
+I10)SELECT First_name,NVL(Incentive_amount,0)
+FROM employee A RIGHT JOIN incentive B
+  ON A.Employee_id=B.Employee_ref_id;
+
+I11)CREATE VIEW taskview AS SELECT  First_name,Last_name,Salary FROM employee 
+
+I12)delimiter $$
+	create procedure highestsalary()
+	begin
+
+		SELECT Department,MAX(Salary) 
+FROM employee
+	end
+	$$
+
+I13)DELIMITER $$
+
+CREATE TRIGGER insert_trigger AFTER INSERT ON employee FOR EACH ROW
+
+BEGIN
+
+	INSERT INTO taskview (First_name,Last_name,Salary,action_performed) 
+    VALUES (new.First_name,new.Last_name,new.Salary,'record Inserted...!');
+
+END
+
+$$
+
+
+
+
+Task : 2
+
+
+A1)Select *from orders where amt > 1000
+A2)Select sname, city from salesperson where comm > 0.10 and city = ‘London’
+A3)Select sname, city from salesperson where city in (‘Barcelona’,’London’)
+A4)SELECT sname, comm FROM salesperson WHERE comm > 0.10 AND comm < 0.12;
+A5)SELECT CNAME FROM customer WHERE RATING <= 100 OR city = ‘Roe’
+A6)SELECT onum FROM orders WHERE amt != 0 or amt IS NOT null;
+A7)SELECT COUNT(DISTINCT snum) from orders
+A8)SELECT odate, snum, MAX(amt) FROM orders GROUP BY odate, snum ORDER BY odate,snum;
+A9)SELECT odate, snum, MAX(amt) FROM orders WHERE amt > 3000 GROUP BY odate, snum ORDER BY odate,snum;
+
+
+
+Task : 3
+
+
+B1) SELECT pno, pname FROM tblproj WHERE budget>100000 
+B2) SELECT * FROM tblworkson WHERE hours < 10 AND resp = 'Manager' 
+B3) SELECT eno, ename FROM tblemp WHERE (title = 'EEE' OR title = 'SA') AND salary > 35000   
+B4) SELECT ename FROM tblemp WHERE dno = 'D1' ORDER BY salary DESC;
+I1) SELECT *FROM tbldept ORDER BY dname ASC;
+I2) SELECT ename, dname, title FROM tblemp,dept WHERE tblemp.dno = tbldept.dno
+I3) SELECT pname, hours,tblproj.pno FROM tblworkson,tblproj WHERE hours > 10 AND tblproj.pno = tblworkson.pno
+A1) SELECT pname, dname, budget FROM tblproj,tbldept WHERE budget < 50000 AND tblproj.dno = tbldept.dno
+A2) SELECT eno, salary FROM tblemp,tbldept WHERE dname='Consulting' ORDER BY salary DESC;
+A3) SELECT ename, pname, title, hours FROM tblemp,tblproj,tblworkson WHERE tblemp.eno=tblworkson.eno and tblproj.pno=tblworkson.pn; 
+
+
+
+
+
+
+
+
+
